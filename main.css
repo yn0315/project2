@@ -47,30 +47,35 @@ section.acount-book .content {
 }
 
 section.acount-book .content .acount-insert {
-    background: lightgray;
+    background: #495057;
     display: flex;
 }
 
 section.acount-book .content .acount-insert input {
     /* background: red; */
-    flex: 1;
-    padding: 8px;
+    flex: 4;
+    /* padding: 8px; */
+    margin:8px 0px 8px 16px;
     font-size: 1.1em;
     line-height: 1.5;
-    color: #000;
+    color: #fff;
 }
 
+
 section.acount-book .content .acount-insert input::placeholder {
-    color: rgb(78, 78, 78);
+    /* color: rgb(78, 78, 78);
+     */
+     color: rgb(184, 178, 178);
 }
 
 section.acount-book .content .acount-insert button {
     /* background: yellow; */
     /* x버튼 자기 영역만큼만 사용하게 하려면 flex 주지 않고 위에 1 다 줌 */
+    flex:2;
     background: #868e96;
     color: #fff;
-    padding: 0 16px;
-    font-size: 1.3em;
+    padding: 10px;
+    font-size: 1.2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,11 +132,11 @@ section.acount-book .content .acount-list .acount-list-item .acount .money {
     text-align: right;
 }
 
-section.acount-book .content .acount-list .acount-list-item .acount .money.plus {
+.money.plus {
     color: blue;
 }
 
-section.acount-book .content .acount-list .acount-list-item .acount .money.minus {
+.money.minus {
     color: red;
 }
 
@@ -174,18 +179,29 @@ section.acount-book .content .acount-list .acount-list-item .remove {
 section.acount-book .content .acount-result {
     font-size: 20px;
     font-weight: 600;
-    color: #fff;
-    background: #495057;
+    color: #000;
+    background: lightgray;
+   
 }
 
 section.acount-book .content .acount-result .total {
     padding: 16px;
-    display: block;
+    display: flex;
     
     border-bottom: 1px solid #000;
 }
 
+section.acount-book .content .acount-result .title {
+    flex: 1;
+}
+
+section.acount-book .content .acount-result span.money {
+    flex: 1;
+    text-align: right;
+    margin-right: 12px;
+}
+
 section.acount-book .content .acount-result .balance {
     padding: 16px;
-    display: block;
+    display: flex;
 }
