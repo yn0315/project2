@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가계부</title>
+
+    <!-- reset.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!-- font- liner icons-->
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <!-- custum css 연결 -->
+    <link rel="stylesheet" href="main.css">
+    <!-- custom js연결 -->
+    <!-- app.js -->
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="acount-book">
+            <h1 class="app-title">가계부</h1>
+            <div class="content">
+                <ul class="acount-list">
+                    <li data-id="1" class="acount-list-item yesterday">
+                        <label class="acount">
+                            <span class="title">전날 이일금</span>
+                            <span class="money plus"><em class="mark">+</em>50000</span>
+                        </label>
+                    </li>
+                    <li data-id="1" class="acount-list-item">
+                        <label class="acount">
+                            <span class="title">분식</span>
+                            <span class="money minus"><em class="mark">-</em>5000</span>
+                        </label>
+                    </li>
+                    <li data-id="2" class="acount-list-item">
+                        <label class="acount">
+                            <span class="title">용돈</span>
+                            <span class="money plus"><em class="mark">+</em>10000</span>
+                        </label>
+                    </li>
+                </ul>
+                <form class="acount-insert">
+                    <!-- autocomplete off는 자동완성 끔 -->
+                    <input type="text" id="acount-text" placeholder="사용내역" autocomplete="off">
+                    <input type="text" id="acount-text" placeholder="금액" autocomplete="off">
+                    <button id="add"><span class="lnr lnr-plus-circle"></span></button>
+                </form>
+                <div class="acount-result">
+                    <label class="total">
+                        <span class="title">합계</span>
+                        <span class="money plus"><em class="mark">+</em>5000</span>
+                    </label>
+                    <label class="balance">
+                        <span class="title">잔금</span>
+                        <span class="money plus"><em class="mark">+</em>55000</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+</body>
+
+</html>
