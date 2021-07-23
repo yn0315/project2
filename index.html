@@ -29,18 +29,23 @@
                             <span class="title">전날 이일금</span>
                             <span class="money plus"><em class="mark">+</em>50000</span>
                         </label>
+                        
                     </li>
-                    <li data-id="1" class="acount-list-item">
+                    <li data-id="2" class="acount-list-item">
                         <label class="acount">
                             <span class="title">분식</span>
                             <span class="money minus"><em class="mark">-</em>5000</span>
                         </label>
+                        <div class="modify"><span class="lnr lnr-undo"></span></div>
+                        <div class="remove"><span class="lnr lnr-cross-circle"></span></div>
                     </li>
-                    <li data-id="2" class="acount-list-item">
+                    <li data-id="3" class="acount-list-item checked">
                         <label class="acount">
                             <span class="title">용돈</span>
                             <span class="money plus"><em class="mark">+</em>10000</span>
                         </label>
+                        <div class="modify"><span class="lnr lnr-undo"></span></div>
+                        <div class="remove"><span class="lnr lnr-cross-circle"></span></div>
                     </li>
                 </ul>
                 <form class="acount-insert">
@@ -50,14 +55,20 @@
                     <button id="add"><span class="lnr lnr-plus-circle"></span></button>
                 </form>
                 <div class="acount-result">
-                    <label class="total">
-                        <span class="title">합계</span>
-                        <span class="money plus"><em class="mark">+</em>5000</span>
-                    </label>
-                    <label class="balance">
-                        <span class="title">잔금</span>
-                        <span class="money plus"><em class="mark">+</em>55000</span>
-                    </label>
+                    <ul class = "result-list">
+                        <li class="spend">
+                            <span class="title">일일지출</span>
+                            <span class="money"><em class="mark">+</em>5000</span>
+                        </li>
+                        <li class="income">
+                            <span class="title">일일수익</span>
+                            <span class="money"><em class="mark">+</em>5000</span>
+                        </li>
+                        <li class="total">
+                            <span class="title">잔금</span>
+                            <span class="money"><em class="mark">+</em>55000</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>

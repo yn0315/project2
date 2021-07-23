@@ -98,8 +98,19 @@ section.acount-book .content .acount-list .acount-list-item {
     display: flex;
     padding: 16px;
     align-items: center;
+    cursor: pointer;
+
     /* background: orange;
     border-bottom: 1px solid #000; */
+}
+
+section.acount-book .content .acount-list .acount-list-item div {
+    display: none;
+}
+
+section.acount-book .content .acount-list .acount-list-item.checked div{
+    display: block;
+    
 }
 
 section.acount-book .content .acount-list .acount-list-item:nth-child(odd) {
@@ -107,6 +118,10 @@ section.acount-book .content .acount-list .acount-list-item:nth-child(odd) {
 }
 
 section.acount-book .content .acount-list .acount-list-item:first-child {
+    background: lightgray;
+    cursor: none;
+}
+section.acount-book .content .acount-list .acount-list-item.checked {
     background: lightgray;
 }
 
@@ -140,7 +155,7 @@ section.acount-book .content .acount-list .acount-list-item .acount .money {
     color: red;
 }
 
-section.acount-book .content .acount-list .acount-list-item .acount .money .mark {
+.money .mark {
     margin-right: 4px;
     font-size: 20px;
 }
@@ -184,24 +199,23 @@ section.acount-book .content .acount-result {
    
 }
 
-section.acount-book .content .acount-result .total {
+section.acount-book .content .acount-result .result-list li {
     padding: 16px;
     display: flex;
-    
     border-bottom: 1px solid #000;
 }
 
-section.acount-book .content .acount-result .title {
+section.acount-book .content .acount-result .result-list li:last-child {
+    border-bottom: none;
+}
+
+
+section.acount-book .content .acount-result .result-list li .title {
     flex: 1;
 }
 
-section.acount-book .content .acount-result span.money {
+section.acount-book .content .acount-result .result-list li span.money {
     flex: 1;
     text-align: right;
     margin-right: 12px;
-}
-
-section.acount-book .content .acount-result .balance {
-    padding: 16px;
-    display: flex;
 }
