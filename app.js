@@ -3,19 +3,18 @@ const acountList = [
     {
         id: 1,
         title: '전날 이일금',
-        money: +5000
+        money: +50000
     },
     {
         id: 2,
-        title: '전날 이일금',
+        title: '분식',
         money: -5000
     },
     {
         id: 3,
-        title: '전날 이일금',
+        title: '용돈',
         money: +10000
-    }
-    
+    }   
 ]
 
 // 함수
@@ -44,20 +43,23 @@ function resultUpdate() {
     assignMark($incomeNode, income);
     assignMark($totalNode, spend+income);
 
-
+    console.log(acountList);
 }
 
 //부호추가함수
-
 function assignMark($targetNode, money) {
-    if (money > 0) {
+    $targetNode.classList.remove('plus');
+    $targetNode.classList.remove('minus');
+
+    if (money === 0) {
+        $targetNode.innerHTML = `${money}`;
+    } else if (money > 0) {
         $targetNode.classList.add('plus');
         $targetNode.innerHTML = `<em class="mark">+</em>${money}`;
       
     } else {
         $targetNode.classList.add('minus');
         $targetNode.innerHTML = `<em class="mark">-</em>${-money}`;
-
     }
 }
 
@@ -72,6 +74,8 @@ function renderNewAcount(newAcount) {
             <span class="title">${newAcount.title}</span>
             <span class="money"></span>
         </label>
+        <div class="modify"><span class="lnr lnr-undo"></span></div>
+        <div class="remove"><span class="lnr lnr-cross-circle"></span></div>
     `;
 
     $li.innerHTML = newElement;
@@ -110,8 +114,27 @@ function makeNewId() {
     return acountList[acountList.length - 1].id + 1;
 }
 
-// 내역 추가 이벤트 함수
-function addAcountList() {
+// 수정할 노드 탐색 함수
+function FindAcountNode(targetId) {
+    const $acountList = document.querySelector('.acount-list');
+    for(let $li of [...$acountList.children]) {
+        if(+$li.dataset.id === targetId) {
+            return $li;
+        }
+    }
+}
+
+// 입력창 초기화
+function inputReset() {
+    const $input = document.querySelector('form.acount-insert');
+    $input.querySelector('#acount-title').value = '';
+    $input.querySelector('#acount-money').value = '';
+    $input.classList.remove('modify-mode');
+    $input.dataset.id = '';
+}
+
+// 확인 버튼 이벤트 함수
+function addModifyBtnClick() {
     const $acountTitle = document.getElementById('acount-title');
     const $acountMoney = document.getElementById('acount-money');
 
@@ -119,23 +142,36 @@ function addAcountList() {
     if(!checkInputData($acountTitle, false)) return;
     if(!checkInputData($acountMoney, true)) return;
 
-    const newAcount = {
-        id: makeNewId(),
-        title: $acountTitle.value,
-        money: +$acountMoney.value
+    // 데이터 추가 및 변경
+    if($acountTitle.parentNode.classList.contains('modify-mode')) { // 수정 모드시
+        const targetId = +$acountTitle.parentNode.dataset.id;
+        const idx = getIdx(targetId);
+        acountList[idx].title = $acountTitle.value;
+        acountList[idx].money = +$acountMoney.value;
+        const $li = FindAcountNode(targetId);
+        $li.querySelector('.title').textContent = $acountTitle.value;
+        assignMark($li.querySelector('.money'), +$acountMoney.value);
+    } else { // 데이터 신규 추가시
+        const newAcount = {
+            id: makeNewId(),
+            title: $acountTitle.value,
+            money: +$acountMoney.value
+        }
+        acountList.push(newAcount);
+    
+        renderNewAcount(newAcount);
     }
-    acountList.push(newAcount);
 
-    renderNewAcount(newAcount);
+    // 입력창 초기화
+    inputReset();
 
-    $acountTitle.value = '';
-    $acountMoney.value = '';
-
+    // 결과 업데이트
     resultUpdate();
 }
 
-// 노드 찾고 다른 li들 초기화후 checked부여 함수
+// 체크 클래스 부여
 function giveChecked($target) {
+    // li노드를 찾아 checked 클래스 부여
     if($target.matches('li.acount-list-item')) {
         for(let $li of [...$target.parentNode.children]) {
             if($li === $target) {
@@ -150,14 +186,44 @@ function giveChecked($target) {
     }
 }
 
+// 수정삭제 모드 또는 일반 모드 변경 함수
 function changeMod($target) {
-    // li노드를 찾아 checked 클래스 부여
+    inputReset();
     giveChecked($target);
+}
+
+// id의 idx값 구하는 함수
+function getIdx(targetId) {
+    for (let i = 0; i < acountList.length; i++) {
+        if(acountList[i].id === targetId) {
+            return i;
+        }
+    }
 }
 
 // 수정 함수
 function modifyMode($target) {
-    log($target.parentNode.dataset.id);
+    const targetId = +$target.parentNode.parentNode.dataset.id;
+    const $acountTitle = document.getElementById('acount-title');
+    const $acountMoney = document.getElementById('acount-money');
+    const idx = getIdx(targetId);
+
+    $acountTitle.value = acountList[idx].title;
+    $acountMoney.value = acountList[idx].money;
+
+    // 인풋 텍스트를 기본모드에서 수정모드로 변경
+    const $input = document.querySelector('form.acount-insert');
+    $input.classList.add('modify-mode');
+    $input.dataset.id = targetId;
+}
+
+// 데이터 삭제 함수
+function removeData($target) {
+    const targetId = +$target.dataset.id;
+    $target.parentNode.removeChild($target);
+    const idx = getIdx(targetId);
+    acountList.splice(idx, 1);
+    resultUpdate();
 }
 
 // 실행
@@ -169,28 +235,28 @@ function modifyMode($target) {
     const $addBtn = document.getElementById('add');
     $addBtn.addEventListener('click', e => {
         e.preventDefault();
-        addAcountList();
+        addModifyBtnClick();
     });
 
     // 클릭시 수정삭제 모드 변경
     const $list = document.querySelector('section.acount-book .content .acount-list');
     $list.addEventListener('click', e => {
-        console.log(e.target);
         if (e.target.matches('.acount-list .yesterday *')) return;
-        if (!e.target.matches('li libel.acount *')) return;
+        if (!e.target.matches('.acount-list-item *')) return;
+        if (e.target.matches('.acount-list-item div span')) return;
         changeMod(e.target);
     });
 
     // 수정 이벤트
     $list.addEventListener('click', e => {
         if (!e.target.matches('.modify span')) return;
-
         modifyMode(e.target);
     });
 
     // 삭제 이벤트
     $list.addEventListener('click', e => {
         if (!e.target.matches('.remove span')) return;
+        removeData(e.target.parentNode.parentNode);
     });
 
 })();
