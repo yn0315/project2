@@ -134,9 +134,36 @@ function addAcountList() {
     resultUpdate();
 }
 
+// 노드 찾고 다른 li들 초기화후 checked부여 함수
+function giveChecked($target) {
+    if($target.matches('li.acount-list-item')) {
+        for(let $li of [...$target.parentNode.children]) {
+            if($li === $target) {
+                $li.classList.toggle('checked')
+            } else {
+                $li.classList.remove('checked');
+            }
+        }
+        return;
+    } else {
+        giveChecked($target.parentNode);
+    }
+}
+
+function changeMod($target) {
+    // li노드를 찾아 checked 클래스 부여
+    giveChecked($target);
+}
+
+// 수정 함수
+function modifyMode($target) {
+    log($target.parentNode.dataset.id);
+}
+
 // 실행
 (function() {
 
+    // 초기화
     resultUpdate();
     // 내역 추가 버튼 눌렀을 경우
     const $addBtn = document.getElementById('add');
@@ -144,4 +171,26 @@ function addAcountList() {
         e.preventDefault();
         addAcountList();
     });
+
+    // 클릭시 수정삭제 모드 변경
+    const $list = document.querySelector('section.acount-book .content .acount-list');
+    $list.addEventListener('click', e => {
+        console.log(e.target);
+        if (e.target.matches('.acount-list .yesterday *')) return;
+        if (!e.target.matches('li libel.acount *')) return;
+        changeMod(e.target);
+    });
+
+    // 수정 이벤트
+    $list.addEventListener('click', e => {
+        if (!e.target.matches('.modify span')) return;
+
+        modifyMode(e.target);
+    });
+
+    // 삭제 이벤트
+    $list.addEventListener('click', e => {
+        if (!e.target.matches('.remove span')) return;
+    });
+
 })();

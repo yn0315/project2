@@ -55,7 +55,7 @@ section.acount-book .content .acount-insert input {
     /* background: red; */
     flex: 4;
     /* padding: 8px; */
-    margin:8px 0px 8px 16px;
+    padding:8px 0px 8px 16px;
     font-size: 1.1em;
     line-height: 1.5;
     color: #fff;
@@ -80,7 +80,6 @@ section.acount-book .content .acount-insert button {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
 }
 
 section.acount-book .content .acount-insert button:hover {
@@ -96,21 +95,10 @@ section.acount-book .content .acount-list {
 section.acount-book .content .acount-list .acount-list-item {
     /* li들을 수평정렬해야해서 여기에 플렉스걸기 */
     display: flex;
-    padding: 16px;
     align-items: center;
-    cursor: pointer;
 
     /* background: orange;
     border-bottom: 1px solid #000; */
-}
-
-section.acount-book .content .acount-list .acount-list-item div {
-    display: none;
-}
-
-section.acount-book .content .acount-list .acount-list-item.checked div{
-    display: block;
-    
 }
 
 section.acount-book .content .acount-list .acount-list-item:nth-child(odd) {
@@ -131,6 +119,11 @@ section.acount-book .content .acount-list .acount-list-item .acount {
     display: flex;
     font-size: 18px;
     font-weight: 600;
+    padding: 16px;
+    cursor: pointer;
+}
+section.acount-book .content .acount-list .acount-list-item.yesterday .acount {
+    cursor: auto;
 }
 
 section.acount-book .content .acount-list .acount-list-item .acount .title {
@@ -178,8 +171,13 @@ section.acount-book .content .acount-list .acount-list-item .acount .mod-input:f
 }
 
 section.acount-book .content .acount-list .acount-list-item div {
+    display: none;
     font-size: 1.5em;
     cursor: pointer;
+}
+
+section.acount-book .content .acount-list .acount-list-item.checked div{
+    display: block;
 }
 
 section.acount-book .content .acount-list .acount-list-item .modify {
@@ -189,6 +187,7 @@ section.acount-book .content .acount-list .acount-list-item .modify {
 
 section.acount-book .content .acount-list .acount-list-item .remove {    
     color: red;
+    margin-right: 10px;
 }
 
 section.acount-book .content .acount-result {
